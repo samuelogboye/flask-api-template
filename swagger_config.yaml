@@ -1,0 +1,12 @@
+swagger: "2.0"
+info:
+  title: "API Name API"
+  description: "API documentation for the API name App"
+  version: "1.0.0"
+schemes:
+  - "http"
+basePath: "/"
+consumes:
+  - "application/json"
+produces:
+  - "application/json"
