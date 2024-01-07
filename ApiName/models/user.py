@@ -9,7 +9,6 @@ from datetime import datetime
 class User(UserMixin, BaseModel):
     __tablename__ = 'users'
 
-    #id = db.Column(db.String(60), primary_key=True)
     email = db.Column(db.String(255), unique=True, nullable=False, index=True)
     first_name = db.Column(db.String(255), nullable=False)
     last_name = db.Column(db.String(255), nullable=False)
@@ -23,9 +22,6 @@ class User(UserMixin, BaseModel):
     is_active = db.Column(db.Boolean, default=True)
     is_admin = db.Column(db.Boolean, default=False)
     last_login = db.Column(db.DateTime, default=datetime.now())
-
-    # Adding a one-to-many relationship with Review
-    reviews = db.relationship('Review', backref='user_reviews', lazy=True)
 
 
     def __init__(self, email, first_name, last_name, password, phone_number, email_confirmed=False, otp=None, otp_expiry=None, house_address=None, profile_picture='http://res.cloudinary.com/dbn9ejpno/image/upload/v1700666059/iuqjx3u5ts4tpvofhdnn.png', is_active=True, is_admin=False, last_login=datetime.now()):

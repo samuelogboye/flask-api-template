@@ -12,8 +12,6 @@ class SampleModelTwo(BaseModel):
         rating = db.Column(db.Integer, nullable=False)
         comment = db.Column(db.String(1000), nullable=True)
 
-        user = db.relationship('User', back_populates='sample_model_twos')
-
 
         def __init__(self, user_id, rating, comment=None):
                 super().__init__()
