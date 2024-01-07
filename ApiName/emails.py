@@ -1,11 +1,8 @@
 """Emails module"""
-
 from flask import url_for, render_template, current_app
 from flask_mail import Message
 from ApiName import mail
 import threading
-
-
 
 def send_password_reset_email(name, email, token):
     # Send a password reset email with the tokenized link

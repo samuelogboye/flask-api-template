@@ -20,9 +20,10 @@ auth_bp = Blueprint('auth', __name__, url_prefix='/api/v1/auth')
 @auth_bp.route('/register', methods=['POST'])
 def register():
     data = request.json
-    required_fields = ['email', 'password', 'first_name', 'last_name', 'phone_number']
-    if not all(field in data for field in required_fields):
-        return jsonify({'message': 'Incomplete registration data'}), 400
+    mandatory_fields = ['email', 'password', 'first_name', 'last_name', 'phone_number']
+    for field in mandatory_fields:
+        if field not in data:
+            return jsonify({'message': f'{field} is required'}), 400
 
     data['email'] = data['email'].lower()
 
