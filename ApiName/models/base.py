@@ -22,15 +22,22 @@ class BaseModel(db.Model):
 
     # Define a primary key column with a default value of a generated UUID
     id = db.Column(db.String(255), primary_key=True, unique=True, nullable=False)
-    createdAt = db.Column(db.TIMESTAMP, server_default=db.func.current_timestamp(), nullable=False)
-    updatedAt = db.Column(db.TIMESTAMP, server_default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
-
+    createdAt = db.Column(
+        db.TIMESTAMP, server_default=db.func.current_timestamp(), nullable=False
+    )
+    updatedAt = db.Column(
+        db.TIMESTAMP,
+        server_default=db.func.current_timestamp(),
+        onupdate=db.func.current_timestamp(),
+    )
 
     def __init__(self, *args, **kwargs):
-      super().__init__(*args, **kwargs)
-      self.id = get_uuid() if not self.id else self.id  # Generate UUID if not provided
-      self.createdAt = datetime.now()
-      self.updatedAt = datetime.now()
+        super().__init__(*args, **kwargs)
+        self.id = (
+            get_uuid() if not self.id else self.id
+        )  # Generate UUID if not provided
+        self.createdAt = datetime.now()
+        self.updatedAt = datetime.now()
 
     def insert(self):
         """Insert the current object into the database"""
@@ -50,6 +57,4 @@ class BaseModel(db.Model):
     def format(self):
         """Format the object's attributes as a dictionary"""
         # This method should be overridden in subclasses
-        raise NotImplementedError(
-            "Subclasses must implement the 'format' method"
-        )
+        raise NotImplementedError("Subclasses must implement the 'format' method")
